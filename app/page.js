@@ -10,6 +10,10 @@ const FaceDetection = () => {
   const cameraRef = useRef(null);
 
   useEffect(() => {
+    if (typeof window === "undefined" || typeof navigator === "undefined") {
+      return;
+    }
+
     const videoElement = videoRef.current;
     const canvasElement = canvasRef.current;
     const canvasCtx = canvasElement.getContext("2d");
@@ -50,16 +54,14 @@ const FaceDetection = () => {
     });
 
     // Set up the camera
-    if (typeof window !== "undefined" && typeof navigator === "undefined") {
-      cameraRef.current = new cam.Camera(videoElement, {
-        onFrame: async () => {
-          await faceMesh.send({ image: videoElement });
-        },
-        width: 640,
-        height: 480,
-      });
-      cameraRef.current.start();
-    }
+    cameraRef.current = new cam.Camera(videoElement, {
+      onFrame: async () => {
+        await faceMesh.send({ image: videoElement });
+      },
+      width: 640,
+      height: 480,
+    });
+    cameraRef.current.start();
 
     // Clean up on component unmount
     return () => {

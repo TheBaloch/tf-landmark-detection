@@ -50,7 +50,7 @@ const FaceDetection = () => {
     });
 
     // Set up the camera
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && typeof navigator === "undefined") {
       cameraRef.current = new cam.Camera(videoElement, {
         onFrame: async () => {
           await faceMesh.send({ image: videoElement });

@@ -9,8 +9,6 @@ const FaceDetection = () => {
   const canvasRef = useRef(null);
   const cameraRef = useRef(null);
 
-  if (typeof navigator === "undefined") return;
-
   useEffect(() => {
     const videoElement = videoRef.current;
     const canvasElement = canvasRef.current;

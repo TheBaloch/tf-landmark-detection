@@ -48,10 +48,8 @@ const FaceDetection = () => {
         const wigY = centerForehead.y * canvasElement.height;
 
         // Calculate width based on forehead width
-        const wigWidth =
-          Math.abs(rightForehead.x - leftForehead.x) * canvasElement.width * 2;
-        const wigHeight =
-          wigWidth * (wigRef.current.height / wigRef.current.width);
+        const wigWidth = 200;
+        const wigHeight = 400;
 
         // Optional: calculate rotation angle based on forehead tilt
         const angle =
@@ -64,7 +62,7 @@ const FaceDetection = () => {
         // Draw the wig image on the canvas
         canvasCtx.save();
         canvasCtx.translate(wigX, wigY); // Move to forehead position
-        canvasCtx.rotate((angle * Math.PI) / 180); // Rotate based on tilt
+        canvasCtx.rotate(((angle * Math.PI) / 180) * 2); // Rotate based on tilt
         canvasCtx.drawImage(
           wigRef.current,
           -wigWidth / 2, // Offset by half width for center positioning
